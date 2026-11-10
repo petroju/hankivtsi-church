@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Записки — Храм Успіння, Ганьківці</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..600;1,7..72,200..500&family=Commissioner:wght@400;500;600&display=swap">
+<style>
+/* Prayer notes: the form on the left, the note as the priest will read it on the right, filling in as you type. */
+:root {
+  --night: #1C2A33; --slate: #3D4E5A; --fog: #DDE3E6; --snow: #F8FAFB; --ember: #E07A3F;
+  --ink: #1C2A33; --muted: #4c5c67;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "Commissioner", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.22, 1.2, .36, 1);
+  --lift: 0 1px 2px rgb(28 42 51 / .06), 0 8px 24px -8px rgb(28 42 51 / .18);
+  font-size: 112.5%; color-scheme: light;
+}
+:root.big { font-size: 131.25%; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--snow); color: var(--ink); font-family: var(--font-body); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; letter-spacing: -.03em; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 em, h3 em { font-style: italic; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.ph { background: rgb(224 122 63 / .14); border-bottom: 1px dashed var(--ember); padding: 0 .2em; border-radius: 3px; }
+
+.bar { position: sticky; top: 0; z-index: 40; background: rgb(28 42 51 / .94); color: var(--snow); padding-top: env(safe-area-inset-top, 0px); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.bar .wrap { display: flex; align-items: center; gap: 8px; padding-block: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; min-width: 0; }
+.brand b { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; white-space: nowrap; }
+.tool { min-width: 48px; min-height: 48px; padding: 0 12px; border-radius: 999px; cursor: pointer; flex: none; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+  border: 1px solid rgb(248 250 251 / .35); background: rgb(248 250 251 / .06); color: var(--snow); font: 600 .95rem var(--font-body); transition: transform .4s var(--ease); }
+.tool:hover { transform: translateY(-1px); }
+.tool:active { transform: scale(.95); }
+.tool[aria-pressed="true"], .tool[aria-current="page"] { background: var(--snow); color: var(--night); }
+@media (max-width: 440px) { .brand b { display: none; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 26px; border-radius: 999px; font: 600 1rem var(--font-body); text-decoration: none; cursor: pointer; border: 0; transition: transform .5s var(--ease); }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: scale(.97); }
+.btn.ember { background: var(--ember); color: #1a0e06; box-shadow: 0 1px 2px rgb(224 122 63 / .3), 0 12px 32px -10px rgb(224 122 63 / .6); }
+
+.head { padding-block: clamp(48px, 9vw, 96px) 32px; background: radial-gradient(60% 80% at 85% 0%, rgb(224 122 63 / .12), transparent 70%), var(--snow); }
+.head .wrap { display: grid; gap: 14px; }
+.head h1 { font-size: clamp(2.6rem, 9vw, 5rem); }
+.head p { color: var(--muted); max-width: 52ch; }
+.label { font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ember); }
+
+.notes { padding-block: 16px clamp(64px, 10vw, 120px); }
+.notes .wrap { display: grid; gap: 32px; align-items: start; }
+form { display: grid; gap: 22px; }
+label { display: grid; gap: 8px; font-weight: 600; font-size: 1.1rem; }
+label small { font-weight: 400; font-size: .92rem; color: var(--muted); }
+textarea { width: 100%; min-height: 9rem; resize: vertical; font: 400 1.1rem/1.5 var(--font-body); color: var(--ink); background: #fff; border: 1.5px solid rgb(61 78 90 / .3); border-radius: 16px; padding: 14px 16px; }
+textarea:hover { border-color: var(--slate); }
+.give { display: grid; gap: 6px; padding: 18px; border-radius: 18px; background: var(--fog); }
+.sent { background: rgb(224 122 63 / .1); border-radius: 14px; padding: 14px 16px; }
+
+.paper { position: sticky; top: 96px; background: #fffdf8; border-radius: 6px 6px 22px 22px; padding: 28px 26px 30px; display: grid; gap: 14px;
+  box-shadow: 0 1px 2px rgb(28 42 51 / .08), 0 30px 60px -30px rgb(28 42 51 / .45), 0 0 0 1px rgb(61 78 90 / .12); }
+.paper .cross { justify-self: center; color: var(--ember); }
+.paper h3 { font-size: 1.6rem; text-align: center; font-style: italic; }
+.paper ol { margin: 0; padding-left: 1.4em; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.6; }
+.empty { color: var(--muted); font-style: italic; text-align: center; }
+.estimate { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; border-top: 1px dashed rgb(61 78 90 / .3); padding-top: 14px; font-variant-numeric: tabular-nums; }
+.estimate b { font-family: var(--font-display); font-weight: 400; font-size: 2rem; display: block; line-height: 1; text-align: center; }
+.estimate span { color: var(--muted); font-size: .9rem; }
+.clear { justify-self: center; background: none; border: 0; color: var(--muted); text-decoration: underline; font: inherit; cursor: pointer; min-height: 44px; }
+.clear:hover { color: var(--ink); }
+
+footer { color: var(--snow); background: linear-gradient(180deg, #1C2A33, #0a1116); padding-block: 48px calc(40px + env(safe-area-inset-bottom, 0px)); }
+footer .wrap { display: grid; gap: 10px; }
+footer a { color: var(--snow); }
+@media (min-width: 820px) { .notes .wrap { grid-template-columns: 1.1fr 1fr; } }
+@media (prefers-reduced-motion: reduce) { .btn, .tool { transition: none; } .paper ol li { animation: none; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 28h26M8 28v-8h18v8M4 20l5-4h16l5 4M11 16v-4h12v4M14 12V9h6v3M13 9l4-5 4 5M17 4V1M15.5 2.2h3M10 12l1.5-2.2L13 12M21 12l1.5-2.2L24 12M15.5 28v-4h3v4"/></svg>
+      <b>Храм Успіння</b>
+    </a>
+    <button type="button" class="tool" id="size-btn" aria-pressed="false" aria-label="Більший шрифт">Aa</button>
+    <a class="tool" href="history.html">Історія</a>
+    <a class="tool" href="gallery.html">Фото</a>
+    <a class="tool" href="notes.html" aria-current="page">Записки</a>
+  </div>
+</header>
+
+<main>
+  <section class="head">
+    <div class="wrap">
+      <p class="label">Записки на Божественну Літургію</p>
+      <h1>Впишіть <em>імена</em></h1>
+      <p>Імена тих, за кого молитися: за здоров’я живих і за упокій спочилих. Записку можна подати з будь-якого куточка світу.</p>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div class="wrap">
+      <form id="note-form">
+        <label for="n-health">За здоров’я<small>Кожне ім’я з нового рядка або через кому</small><textarea id="n-health" name="health" placeholder="Марія, Іван"></textarea></label>
+        <label for="n-repose">За упокій<small>Кожне ім’я з нового рядка або через кому</small><textarea id="n-repose" name="repose" placeholder="Анна"></textarea></label>
+        <div class="give">
+          <b>Добровільна пожертва</b>
+          <span>Картка храму: <span class="ph">[номер картки храму]</span></span>
+          <span>PayPal: <span class="ph">[PayPal храму]</span></span>
+        </div>
+        <button class="btn ember" type="submit" style="justify-self:start">Надіслати записку</button>
+        <p class="sent" id="sent" hidden>Це перший варіант сайту, тому записка ще нікуди не надсилається. Коли з’явиться адмін-частина, вона прийде до храму.</p>
+      </form>
+
+      <aside class="paper" aria-live="polite" aria-label="Ваша записка">
+        <svg class="cross" width="22" height="34" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 2v26M5 6h10M2 12h16M5 21l10-3"/></svg>
+        <h3>За здоров’я</h3>
+        <ol id="p-health"></ol>
+        <p class="empty" id="e-health">Імена з’являться тут</p>
+        <h3>За упокій</h3>
+        <ol id="p-repose"></ol>
+        <p class="empty" id="e-repose">Імена з’являться тут</p>
+        <div class="estimate">
+          <div><b id="c-health">0</b><span>за здоров’я</span></div>
+          <div><b id="c-repose">0</b><span>за упокій</span></div>
+          <div><b id="c-total">0</b><span>імен разом</span></div>
+        </div>
+        <button type="button" class="clear" id="clear">Почати нову записку</button>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">Храм Успіння Пресвятої Богородиці</a>
+    <span>Православна церква України, село Ганьківці, Івано-Франківська область</span>
+  </div>
+</footer>
+
+<script>
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const sizeBtn = document.getElementById("size-btn");
+function setBig(on) { document.documentElement.classList.toggle("big", on); sizeBtn.setAttribute("aria-pressed", on); store.set("church-big", on ? "1" : "0"); }
+sizeBtn.onclick = () => setBig(!document.documentElement.classList.contains("big"));
+setBig(store.get("church-big") === "1");
+
+// The note redraws on every keystroke; an unsent draft survives a reload on this device
+const nh = document.getElementById("n-health"), nr = document.getElementById("n-repose");
+const names = v => v.split(/[\n,;]+/).map(s => s.trim()).filter(Boolean);
+function fill(listId, emptyId, arr) {
+  document.getElementById(listId).replaceChildren(...arr.map(n => { const li = document.createElement("li"); li.textContent = n; return li; }));
+  document.getElementById(emptyId).hidden = arr.length > 0;
+}
+function render() {
+  const h = names(nh.value), r = names(nr.value);
+  fill("p-health", "e-health", h); fill("p-repose", "e-repose", r);
+  document.getElementById("c-health").textContent = h.length;
+  document.getElementById("c-repose").textContent = r.length;
+  document.getElementById("c-total").textContent = h.length + r.length;
+  store.set("note-draft", JSON.stringify([nh.value, nr.value]));
+}
+try { const d = JSON.parse(store.get("note-draft") || "null"); if (d) { nh.value = d[0]; nr.value = d[1]; } } catch (e) {}
+nh.addEventListener("input", render); nr.addEventListener("input", render);
+document.getElementById("clear").onclick = () => { nh.value = nr.value = ""; document.getElementById("sent").hidden = true; render(); nh.focus(); };
+document.getElementById("note-form").addEventListener("submit", e => { e.preventDefault(); document.getElementById("sent").hidden = false; });
+render();
+</script>
+</body>
+</html>

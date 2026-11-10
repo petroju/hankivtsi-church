@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Храм Успіння, Ганьківці</title>
+<meta name="description" content="Храм Успіння Пресвятої Богородиці, Православна церква України, село Ганьківці.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..600;1,7..72,200..500&family=Commissioner:wght@400;500;600&display=swap">
+<style>
+/* Concept: a matte painting of the Carpathian foothills at dusk. Scrolling sinks the view toward the village,
+   night falls, fog parts and the church appears on the nearest hill as its windows light.
+   Tokens: night ridge, slate, fog, snow; ember only for candlelight, lit windows and tiny accents. */
+:root {
+  --night: #1C2A33;
+  --slate: #3D4E5A;
+  --fog: #DDE3E6;
+  --snow: #F8FAFB;
+  --ember: #E07A3F;
+  --deep: #0f181e;
+  --ink: #1C2A33;
+  --muted: #4c5c67;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "Commissioner", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gap: clamp(20px, 4vw, 40px);
+  --section: clamp(72px, 12vw, 160px);
+  --ease: cubic-bezier(.22, 1.2, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --lift: 0 1px 2px rgb(28 42 51 / .06), 0 8px 24px -8px rgb(28 42 51 / .18);
+  --float: 0 2px 4px rgb(15 24 30 / .2), 0 24px 60px -20px rgb(15 24 30 / .55);
+  font-size: 112.5%;
+  color-scheme: light;
+}
+:root.big { font-size: 131.25%; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { margin: 0; background: var(--snow); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; letter-spacing: -.03em; line-height: 1.02; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(2.2rem, 7vw, 4.6rem); }
+h2 em, h1 em { font-style: italic; font-weight: 300; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; border-radius: 6px; }
+.label { font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.ph { background: rgb(224 122 63 / .14); border-bottom: 1px dashed var(--ember); padding: 0 .2em; border-radius: 3px; white-space: nowrap; }
+
+/* Buttons: hover, focus-visible and active on every one */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 26px;
+  border-radius: 999px; font: 600 1rem var(--font-body); text-decoration: none; cursor: pointer; border: 1.5px solid transparent;
+  transition: transform .5s var(--ease), opacity .3s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(.97); }
+.btn.ember { background: var(--ember); color: #1a0e06; box-shadow: 0 1px 2px rgb(224 122 63 / .3), 0 12px 32px -10px rgb(224 122 63 / .6); }
+.btn.ghost { background: rgb(248 250 251 / .08); color: var(--snow); border-color: rgb(248 250 251 / .45); }
+.btn.dark { background: var(--night); color: var(--snow); box-shadow: var(--lift); }
+
+/* Top bar */
+.bar { position: fixed; z-index: 40; top: 0; left: 0; right: 0; padding-top: env(safe-area-inset-top, 0px); color: var(--snow); pointer-events: none; }
+.bar .wrap { display: flex; align-items: center; gap: 10px; padding-block: 12px; }
+.bar a, .bar button { pointer-events: auto; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; min-width: 0; text-shadow: 0 1px 12px rgb(15 24 30 / .5); }
+.brand svg { flex: none; }
+.brand b { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; letter-spacing: -.01em; white-space: nowrap; }
+.tool {
+  min-width: 48px; min-height: 48px; padding: 0 12px; border-radius: 999px; cursor: pointer; flex: none;
+  border: 1px solid rgb(248 250 251 / .4); background: rgb(15 24 30 / .35); color: var(--snow); font: 600 .95rem var(--font-body);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .4s var(--ease);
+}
+.tool:hover { transform: translateY(-1px); }
+.tool:active { transform: scale(.95); }
+.tool[aria-pressed="true"] { background: var(--snow); color: var(--night); }
+a.tool { display: inline-flex; align-items: center; text-decoration: none; }
+.nav { display: flex; gap: 8px; }
+@media (max-width: 440px) { .brand b { display: none; } }
+@media (max-width: 400px) { .nav .tool { padding: 0 9px; font-size: .88rem; } }
+.bar { transition: background-color .4s ease; }
+.bar.solid { background: rgb(28 42 51 / .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgb(248 250 251 / .08), 0 10px 30px -12px rgb(15 24 30 / .5); }
+.bar.solid .tool { background: rgb(248 250 251 / .08); }
+
+/* ---------- HERO ---------- */
+.hero { position: relative; height: 420vh; background: var(--deep); }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.layer { position: absolute; inset: 0; will-change: transform; }
+.layer > .settle { position: absolute; inset: 0; animation: settle 1.8s var(--ease-out) both; }
+.layer canvas, .layer svg { position: absolute; left: 0; width: 100%; height: 100%; top: 0; }
+.painting img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.painting .settle::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(15 24 30 / .55) 0%, rgb(15 24 30 / .15) 32%, transparent 55%, rgb(15 24 30 / .3) 100%); }
+canvas[data-tall] { height: 170%; }
+#near, #spruce { transform: translate3d(0, 100vh, 0); }
+@keyframes settle { from { opacity: 0; transform: translateY(6vh); } }
+.sky { background:
+  radial-gradient(70% 35% at 30% 78%, rgb(246 196 170 / .55), transparent 70%),
+  radial-gradient(120% 60% at 50% 100%, rgb(232 169 140 / .45), transparent 70%),
+  linear-gradient(180deg, #1C2A33 0%, #2f3f4b 28%, #6d6f80 52%, #b98f8f 68%, #e9b49a 80%, #f2c9ad 100%); }
+.night { background: linear-gradient(180deg, #0a1116 0%, #111d25 55%, #1C2A33 100%); opacity: 0; }
+.stars { opacity: 0; }
+.headline { position: absolute; z-index: 3; left: 0; right: 0; top: 11vh; text-align: center; color: var(--snow); padding: 0 20px; }
+.headline .label { opacity: .8; display: block; margin-bottom: 14px; }
+.headline h1 { font-size: clamp(2.6rem, min(10.5vw, 11vh), 7.4rem); font-weight: 200; }
+.headline h1 span { display: block; overflow: hidden; padding-bottom: .08em; }
+.headline h1 span > i { display: block; font-style: inherit; animation: wipe 1.4s var(--ease-out) both; }
+.headline h1 span:nth-child(2) > i { animation-delay: .15s; }
+.headline h1 span:nth-child(3) > i { animation-delay: .3s; }
+@keyframes wipe { from { transform: translateY(105%); } }
+.fog { pointer-events: none; }
+.fog i { position: absolute; width: 140%; height: 40%; left: -20%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(221 227 230 / .35), rgb(221 227 230 / 0)); animation: drift 36s ease-in-out infinite alternate; }
+.fog i:nth-child(2) { top: 58%; animation-duration: 48s; animation-direction: alternate-reverse; opacity: .7; }
+.fog i:nth-child(1) { top: 46%; }
+@keyframes drift { to { transform: translateX(12%); } }
+.curtain { position: absolute; top: 50%; bottom: -12%; width: 80%; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgb(221 227 230 / .7), rgb(221 227 230 / .4) 55%, rgb(221 227 230 / 0)); }
+.curtain.l { left: -20%; }
+.curtain.r { right: -20%; }
+.hint { position: absolute; z-index: 30; left: 0; right: 0; bottom: max(28px, env(safe-area-inset-bottom, 0px)); display: grid; justify-items: center; gap: 12px; color: var(--snow); }
+.hint p { font-size: .95rem; opacity: .9; text-shadow: 0 1px 10px rgb(15 24 30 / .6); }
+.hint .line { width: 1px; height: 44px; background: linear-gradient(var(--snow), transparent); animation: hintline 2.4s ease-in-out infinite; transform-origin: top; }
+@keyframes hintline { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+.welcome { position: absolute; z-index: 30; left: 0; right: 0; bottom: max(40px, calc(env(safe-area-inset-bottom, 0px) + 24px)); display: grid; justify-items: center; gap: 18px; text-align: center; color: var(--snow); opacity: 0; transform: translateY(20px); pointer-events: none; padding: 0 20px; }
+.welcome.on { opacity: 1; transform: none; pointer-events: auto; transition: opacity .8s ease, transform 1s var(--ease-out); }
+.welcome p { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: clamp(1.5rem, 5vw, 2.4rem); line-height: 1.2; }
+.welcome .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.skip { position: absolute; z-index: 31; right: max(20px, env(safe-area-inset-right, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px)); }
+.skip .btn { min-height: 48px; padding: 0 18px; font-size: .92rem; }
+@media (max-height: 560px) { .welcome p { display: none; } .welcome { bottom: 12px; } }
+#church .win { opacity: 0; transition: opacity 1.2s ease; }
+#church .win.lit { opacity: 1; }
+
+/* ---------- STORY ---------- */
+.story { padding-block: var(--section); background:
+  radial-gradient(60% 50% at 90% 0%, rgb(221 227 230 / .7), transparent 70%), var(--snow); }
+.story .wrap { display: grid; gap: var(--gap); }
+.figure { font-family: var(--font-display); font-weight: 200; letter-spacing: -.05em; line-height: .85; font-size: clamp(7rem, 30vw, 19rem); color: var(--night); font-variant-numeric: tabular-nums lining-nums; }
+.figure-cap { color: var(--muted); max-width: 30ch; margin-top: 18px; }
+.story-text { display: grid; gap: 18px; max-width: 60ch; }
+.story-text h2 { margin-bottom: 8px; }
+.facts { display: grid; gap: 0; margin: 12px 0 0; }
+.facts div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 16px; padding-block: 14px; border-top: 1px solid rgb(61 78 90 / .18); }
+.facts dt { color: var(--muted); font-size: .9rem; }
+.facts dd { margin: 0; font-weight: 500; }
+
+/* ---------- SERVICES + WINDOW ---------- */
+.services { padding-block: var(--section); background: var(--fog); }
+.services .wrap { display: grid; gap: var(--gap); }
+.svc-head { display: grid; gap: 14px; max-width: 40ch; }
+.svc-head p { color: var(--muted); }
+.svc-list { list-style: none; margin: 0; padding: 0; counter-reset: svc; }
+.svc-list button {
+  width: 100%; display: grid; grid-template-columns: 3rem 1fr auto; gap: 14px; align-items: baseline; text-align: left;
+  padding: 18px 4px; min-height: 72px; background: none; border: 0; border-top: 1px solid rgb(61 78 90 / .25);
+  font: inherit; color: var(--ink); cursor: pointer; transition: transform .5s var(--ease), opacity .3s ease; opacity: .62;
+}
+.svc-list li:last-child button { border-bottom: 1px solid rgb(61 78 90 / .25); }
+.svc-list button:hover { opacity: .9; transform: translateX(4px); }
+.svc-list button:active { transform: translateX(2px) scale(.99); }
+.svc-list button[aria-pressed="true"] { opacity: 1; }
+.svc-list .n { font-family: var(--font-display); font-style: italic; color: var(--slate); font-size: 1.1rem; }
+.svc-list button[aria-pressed="true"] .n { color: var(--ember); }
+.svc-list b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 1.45rem; letter-spacing: -.02em; line-height: 1.2; }
+.svc-list small { display: block; color: var(--muted); font-size: .95rem; margin-top: 2px; }
+.svc-list .t { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; font-variant-numeric: tabular-nums; }
+.window { position: relative; aspect-ratio: 3 / 4; max-width: 460px; width: 100%; justify-self: center; border-radius: 999px 999px 18px 18px; overflow: hidden;
+  box-shadow: 0 0 0 10px #f1ece4, 0 0 0 12px rgb(61 78 90 / .25), var(--float); background: var(--night); }
+.window .scene { position: absolute; inset: 0; opacity: 0; transition: opacity 1.1s ease; }
+.window .scene.on { opacity: 1; }
+.window svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mullion { position: absolute; inset: 0; pointer-events: none; }
+.mullion::before, .mullion::after { content: ""; position: absolute; background: #f1ece4; box-shadow: 0 0 0 1px rgb(61 78 90 / .2); }
+.mullion::before { left: 50%; top: 0; bottom: 0; width: 8px; transform: translateX(-50%); }
+.mullion::after { top: 46%; left: 0; right: 0; height: 8px; }
+@media (max-width: 959px) { .win-col { order: -1; grid-row: 2; } .svc-head { grid-row: 1; } .window { max-width: 240px; } }
+.week { display: grid; gap: 10px; padding: 22px; border-radius: 20px; background: rgb(248 250 251 / .7); }
+.week h3 { font-size: 1.5rem; }
+.week ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.week li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding-block: 10px; border-top: 1px solid rgb(61 78 90 / .2); }
+.week li b { font-weight: 600; }
+.week li span { color: var(--muted); font-size: .95rem; }
+.window-cap { text-align: center; color: var(--muted); font-size: .95rem; margin-top: 18px; }
+
+/* ---------- SEASONS ---------- */
+.seasons { padding-block: var(--section); background: var(--snow); }
+.seasons .wrap { display: grid; gap: var(--gap); }
+.season-grid { display: grid; gap: 16px; }
+.season { position: relative; overflow: hidden; border-radius: 28px; min-height: 30rem; padding: 32px; display: grid; align-content: end; gap: 10px; color: var(--snow); box-shadow: var(--float); }
+.season > * { position: relative; z-index: 2; }
+.season.winter { background:
+  radial-gradient(80% 50% at 50% 100%, rgb(221 227 230 / .35), transparent 70%),
+  linear-gradient(180deg, #1C2A33 0%, #3D4E5A 60%, #8a9aa5 100%); }
+.season.summer { background:
+  radial-gradient(60% 40% at 70% 30%, rgb(255 226 170 / .6), transparent 70%),
+  linear-gradient(180deg, #7fa0b5 0%, #c9d6c4 55%, #6f8a5e 100%); color: var(--night); }
+.season canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.season svg.hills { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 45%; z-index: 1; }
+.season.winter::after { content: ""; position: absolute; inset: 40% 0 0; z-index: 1; background: linear-gradient(180deg, transparent, rgb(15 24 30 / .7)); }
+.season .label { opacity: .85; }
+.season h3 { font-size: clamp(2rem, 5vw, 3.2rem); }
+.season p { max-width: 36ch; }
+
+/* ---------- PARISH LIFE ---------- */
+.life { padding-block: var(--section); background: var(--snow); }
+.life .wrap { display: grid; gap: 28px; }
+.life-head { display: grid; gap: 12px; max-width: 46ch; }
+.life-head p:last-child { color: var(--muted); }
+.life-grid { display: grid; gap: 14px; }
+.shot { position: relative; margin: 0; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--fog); box-shadow: var(--lift); }
+.shot img { width: 100%; height: 100%; object-fit: cover; }
+.shot figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 18px 14px; color: var(--snow); font-weight: 500; background: linear-gradient(0deg, rgb(15 24 30 / .7), transparent); }
+.shot.empty { display: grid; place-items: center; background: repeating-linear-gradient(135deg, var(--fog) 0 14px, #e6eaec 14px 28px); }
+.shot.empty::before { content: "Фото скоро з’явиться"; color: var(--muted); font-size: .95rem; }
+.shot.empty figcaption { color: var(--ink); background: none; }
+.live-card { display: grid; align-content: end; gap: 4px; padding: 22px; text-decoration: none; color: var(--snow);
+  background: radial-gradient(60% 60% at 80% 20%, rgb(224 122 63 / .35), transparent 70%), var(--night); transition: transform .5s var(--ease); }
+.live-card:hover { transform: translateY(-3px); }
+.live-card:active { transform: scale(.98); }
+.live-card b { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; }
+.live-card span:last-child { opacity: .8; }
+.live-dot { width: 14px; height: 14px; border-radius: 50%; background: #e5483b; box-shadow: 0 0 0 6px rgb(229 72 59 / .25); }
+@media (min-width: 900px) { .life-grid { grid-template-columns: 1.3fr 1fr 1fr; } .life-grid .shot:first-child { aspect-ratio: auto; grid-row: span 1; } }
+
+/* ---------- WORDS OF THE HIERARCHS ---------- */
+.words { position: relative; padding-block: var(--section); color: var(--snow);
+  background: radial-gradient(40% 50% at 15% 30%, rgb(224 122 63 / .22), transparent 70%), radial-gradient(40% 40% at 90% 85%, rgb(224 122 63 / .12), transparent 70%), #121a20; }
+.words .wrap { display: grid; gap: clamp(48px, 8vw, 96px); }
+.word { margin: 0; display: grid; gap: 18px; max-width: 46ch; }
+.word:nth-child(2) { justify-self: end; text-align: right; }
+.word blockquote { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: clamp(1.6rem, 4.4vw, 2.6rem); line-height: 1.25; letter-spacing: -.02em; }
+.word figcaption { display: grid; gap: 2px; font-size: .95rem; }
+.word-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px rgb(224 122 63 / .55), 0 12px 30px -10px rgb(0 0 0 / .6); }
+.word:nth-child(2) .word-photo { justify-self: end; }
+.word figcaption b { font-weight: 600; color: #f3b48c; }
+.word figcaption span { opacity: .75; }
+.word figcaption a { color: inherit; }
+
+/* ---------- CHURCH, EPARCHY, CONTACTS ---------- */
+.church-info { padding-block: var(--section); background: var(--snow); }
+.church-info .wrap { display: grid; gap: 32px; }
+.info-grid { display: grid; gap: 16px; }
+.info-grid article { display: grid; gap: 10px; align-content: start; padding: 26px; border-radius: 22px; background: #fff; box-shadow: var(--lift); }
+.info-grid .label { color: var(--ember); }
+.info-grid h3 { font-size: 1.6rem; }
+.info-grid p { color: var(--muted); }
+.info-grid a { font-weight: 600; color: var(--night); min-height: 44px; display: inline-flex; align-items: center; }
+.contacts { display: grid; gap: 8px; padding: 26px; border-radius: 22px; background: var(--fog); }
+.contacts h3 { font-size: 1.6rem; margin-bottom: 4px; }
+@media (min-width: 900px) { .info-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- PATRONAL FEAST ---------- */
+.feast { padding-block: var(--section); background: var(--snow); }
+.feast-card { position: relative; overflow: hidden; border-radius: 28px; min-height: 32rem; padding: 32px; display: grid; align-content: end; gap: 28px; color: var(--night); box-shadow: var(--float);
+  background: radial-gradient(60% 40% at 70% 25%, rgb(255 226 170 / .6), transparent 70%), linear-gradient(180deg, #7fa0b5 0%, #c9d6c4 55%, #6f8a5e 100%); }
+.feast-card > *:not(svg) { position: relative; z-index: 2; }
+.feast-card svg.hills { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 30%; z-index: 1; }
+.feast-copy { display: grid; gap: 12px; max-width: 34ch; }
+.age { display: grid; gap: 6px; color: var(--snow); text-shadow: 0 1px 14px rgb(15 24 30 / .35); }
+.age-num { font-family: var(--font-display); font-weight: 200; letter-spacing: -.05em; line-height: .85; font-size: clamp(6rem, 24vw, 13rem); font-variant-numeric: tabular-nums lining-nums; }
+.age-cap { font-size: 1.1rem; max-width: 26ch; }
+.age-next { opacity: .95; }
+@media (min-width: 900px) { .feast-card { grid-template-columns: 1.2fr 1fr; align-items: end; padding: 48px; } }
+
+/* ---------- CANDLE ROOM ---------- */
+.candles { position: relative; overflow: hidden; padding-block: var(--section); color: var(--snow);
+  background: radial-gradient(60% 50% at 30% 70%, rgb(224 122 63 / .28), transparent 70%), radial-gradient(40% 40% at 80% 20%, rgb(224 122 63 / .12), transparent 70%), #120c08; }
+.candles .wrap { display: grid; gap: var(--gap); align-items: center; }
+.candles .photo { position: relative; border-radius: 26px; overflow: hidden; box-shadow: var(--float); aspect-ratio: 4 / 3; }
+.candles .photo img { width: 100%; height: 100%; object-fit: cover; }
+.candles .photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: #b5652e; mix-blend-mode: multiply; opacity: .55; }
+.candles .photo::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(0deg, rgb(0 0 0 / .6), transparent 60%); }
+.candles h2 { font-size: clamp(2.4rem, 7vw, 4.8rem); }
+.candles .copy { display: grid; gap: 18px; max-width: 46ch; }
+.candles .copy p { color: rgb(248 250 251 / .82); }
+.flames { display: flex; gap: 22px; align-items: end; height: 92px; margin-top: 6px; }
+.candle { width: 14px; border-radius: 3px; background: linear-gradient(90deg, #e9dcc6, #fff8ec 50%, #d9c9ad); position: relative; }
+.candle::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 12px; height: 22px; margin-left: -6px; border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 50% 70%, #fff6d6 0 25%, #ffcf6b 45%, var(--ember) 75%, transparent 76%);
+  box-shadow: 0 0 22px 8px rgb(224 122 63 / .45); transform-origin: 50% 100%; animation: flicker 2.6s ease-in-out infinite; }
+.candle:nth-child(2)::before { animation-delay: -.8s; animation-duration: 3.1s; }
+.candle:nth-child(3)::before { animation-delay: -1.6s; animation-duration: 2.2s; }
+.candle:nth-child(4)::before { animation-delay: -.4s; animation-duration: 3.4s; }
+@keyframes flicker { 0%, 100% { transform: scale(1) rotate(-1deg); opacity: 1; } 30% { transform: scale(.94, 1.06) rotate(2deg); opacity: .92; } 60% { transform: scale(1.04, .95) rotate(-2deg); } }
+
+/* ---------- WAY HERE ---------- */
+.way { padding-block: var(--section); background: var(--fog); }
+.way .wrap { display: grid; gap: var(--gap); }
+.map { position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--float); background: #c9d1d5; }
+.map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map .dot { opacity: 0; transition: opacity .25s ease; }
+.map .dot.on { opacity: 1; }
+.routes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.routes li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 14px; padding-block: 16px; border-top: 1px solid rgb(61 78 90 / .25); }
+.routes .sw { width: 22px; height: 4px; border-radius: 2px; margin-top: .75em; }
+.routes b { font-weight: 600; }
+.routes p { color: var(--muted); }
+
+/* ---------- NOTES FORM ---------- */
+.notes { padding-block: var(--section); background: var(--snow); }
+.notes .wrap { display: grid; gap: var(--gap); align-items: start; }
+.notes form { display: grid; gap: 18px; }
+label { display: grid; gap: 8px; font-weight: 600; }
+label small { font-weight: 400; color: var(--muted); }
+textarea, input { width: 100%; font: 400 1.05rem/1.5 var(--font-body); color: var(--ink); background: #fff; border: 1.5px solid rgb(61 78 90 / .3); border-radius: 16px; padding: 14px 16px; transition: transform .3s ease; }
+textarea { min-height: 7.5rem; resize: vertical; }
+textarea:hover, input:hover { border-color: var(--slate); }
+textarea:focus-visible, input:focus-visible { outline: 3px solid var(--ember); outline-offset: 1px; }
+.paper { position: sticky; top: 96px; background: #fffdf8; border-radius: 6px 6px 22px 22px; padding: 28px 26px 30px; box-shadow: 0 1px 2px rgb(28 42 51 / .08), 0 30px 60px -30px rgb(28 42 51 / .45), 0 0 0 1px rgb(61 78 90 / .12); display: grid; gap: 14px; }
+.paper .cross { justify-self: center; color: var(--ember); }
+.paper h3 { font-size: 1.6rem; text-align: center; font-style: italic; }
+.paper ol { margin: 0; padding-left: 1.4em; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.6; }
+.paper .empty { color: var(--muted); font-style: italic; text-align: center; }
+.estimate { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; border-top: 1px dashed rgb(61 78 90 / .3); padding-top: 14px; font-variant-numeric: tabular-nums; }
+.estimate b { font-family: var(--font-display); font-weight: 400; font-size: 2rem; display: block; line-height: 1; }
+.estimate span { color: var(--muted); font-size: .9rem; }
+.sent { background: rgb(224 122 63 / .1); border-radius: 14px; padding: 14px 16px; }
+.give { display: grid; gap: 6px; padding: 18px; border-radius: 18px; background: var(--fog); }
+
+/* ---------- FOOTER ---------- */
+footer { position: relative; overflow: hidden; color: var(--snow); padding-block: var(--section) calc(48px + env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(50% 40% at 50% 100%, rgb(61 78 90 / .6), transparent 70%), linear-gradient(180deg, #1C2A33, #0a1116); }
+footer canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+footer .wrap { position: relative; display: grid; gap: 22px; }
+footer h2 { font-size: clamp(2.4rem, 8vw, 5rem); }
+footer .links { display: flex; flex-wrap: wrap; gap: 10px; }
+footer small { opacity: .65; }
+
+/* ---------- LARGER SCREENS ---------- */
+@media (min-width: 720px) {
+  .story .wrap { grid-template-columns: 1fr 1fr; align-items: end; }
+  .season-grid { grid-template-columns: 1fr 1fr; }
+  .notes .wrap { grid-template-columns: 1.1fr 1fr; }
+}
+@media (min-width: 960px) {
+  .services .wrap { grid-template-columns: 1.1fr 1fr; align-items: center; column-gap: 72px; }
+  .svc-head { grid-column: 1 / -1; }
+  .win-col { grid-column: 2; grid-row: 2 / span 2; }
+  .svc-list, .week { grid-column: 1; }
+  .candles .wrap { grid-template-columns: 1.2fr 1fr; }
+  .way .wrap { grid-template-columns: 1.4fr 1fr; align-items: center; }
+  .season { min-height: 36rem; padding: 44px; }
+}
+
+/* ---------- CALM MODE ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero { height: auto; }
+  .stage { position: relative; height: 100svh; }
+  .layer > .settle, .headline h1 span > i, .fog i, .hint .line, .candle::before { animation: none; }
+  .btn, .tool, .svc-list button, .window .scene, #church .win { transition: none; }
+  .hint, .curtain { display: none; }
+  #near, #spruce { transform: none; }
+  .welcome { opacity: 1; transform: none; pointer-events: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 28h26M8 28v-8h18v8M4 20l5-4h16l5 4M11 16v-4h12v4M14 12V9h6v3M13 9l4-5 4 5M17 4V1M15.5 2.2h3M10 12l1.5-2.2L13 12M21 12l1.5-2.2L24 12M15.5 28v-4h3v4"/></svg>
+      <b data-t="brand">Храм Успіння</b>
+    </a>
+    <button type="button" class="tool" id="size-btn" aria-pressed="false" aria-label="Більший шрифт">Aa</button>
+    <nav class="nav" aria-label="Розділи"><a class="tool" href="history.html">Історія</a><a class="tool" href="gallery.html">Фото</a><a class="tool" href="notes.html">Записки</a></nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO: painted dusk, scroll descends to the church -->
+  <section class="hero" id="hero" aria-label="Храм Успіння на пагорбі">
+    <div class="stage" id="stage">
+      <div class="layer sky" data-speed="0"></div>
+      <div class="layer painting" id="painting"><div class="settle"><img src="img/christ-road.webp" srcset="img/christ-road-960.webp 960w, img/christ-road.webp 1920w" sizes="100vw" alt="Христос іде кам’янистою дорогою, позаду на пагорбах Єрусалим"></div></div>
+      <div class="layer night" id="night"></div>
+      <div class="layer stars" id="stars-layer"><canvas id="stars"></canvas></div>
+
+      <div class="headline" id="headline">
+        <span class="label" data-t="eyebrow">Православна церква України · село Ганьківці</span>
+        <h1><span><i data-t="h1a">Храм</i></span><span><i><em data-t="h1b">Успіння</em></i></span><span><i data-t="h1c">Пресвятої Богородиці</i></span></h1>
+      </div>
+
+      <div class="layer fog" data-speed="0.62"><i></i><i></i></div>
+
+      <div class="layer" id="near">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <defs>
+            <filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <linearGradient id="ridgeFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22323c"/><stop offset="1" stop-color="#0f181e"/></linearGradient>
+            <linearGradient id="domeFill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9c7a3c"/><stop offset=".55" stop-color="#5e4a26"/><stop offset="1" stop-color="#2d2416"/></linearGradient>
+          </defs>
+          <path d="M0 720 C 180 690 300 652 420 638 C 520 626 600 613 735 612 C 870 613 950 626 1050 640 C 1180 660 1290 646 1440 662 L1440 900 L0 900 Z" fill="url(#ridgeFill)"/>
+          <!-- Churchyard the church stands on -->
+          <path d="M722 612 L748 612 L860 900 L610 900 Z" fill="#2f3f49" opacity=".75"/>
+          <g id="fence" stroke="#2b3a45" stroke-width="3" fill="none"></g>
+          <!-- The church on the crest: log body with skirt roof, blue drum, gold tent dome, turrets, bell tower, chapel -->
+          <g id="church" transform="translate(570 438) scale(1)">
+            <g fill="#16222a">
+              <rect x="70" y="120" width="180" height="52"/>
+              <polygon points="52,128 82,106 238,106 268,128"/>
+              <rect x="92" y="74" width="136" height="34"/>
+              <polygon points="84,78 104,58 216,58 236,78"/>
+              <polygon points="134,60 160,34 186,60"/>
+              <rect x="138" y="8" width="44" height="40" fill="#1d3550"/>
+              <polygon points="132,10 160,-34 188,10" fill="url(#domeFill)"/>
+              <rect x="155" y="-50" width="10" height="16" fill="#1d3550"/>
+              <ellipse cx="160" cy="-56" rx="7" ry="9" fill="url(#domeFill)"/>
+              <rect x="158.5" y="-84" width="3" height="22" fill="#9c7a3c"/><rect x="152" y="-77" width="16" height="2.6" fill="#9c7a3c"/>
+              <rect x="103" y="44" width="8" height="16" fill="#1d3550"/><ellipse cx="107" cy="38" rx="6" ry="8" fill="url(#domeFill)"/><rect x="106" y="16" width="2.4" height="16" fill="#9c7a3c"/><rect x="101" y="21" width="12" height="2" fill="#9c7a3c"/>
+              <rect x="209" y="44" width="8" height="16" fill="#1d3550"/><ellipse cx="213" cy="38" rx="6" ry="8" fill="url(#domeFill)"/><rect x="212" y="16" width="2.4" height="16" fill="#9c7a3c"/><rect x="207" y="21" width="12" height="2" fill="#9c7a3c"/>
+              <!-- bell tower -->
+              <rect x="-6" y="96" width="38" height="76"/>
+              <polygon points="-14,100 13,80 40,100"/>
+              <rect x="5" y="62" width="16" height="20" fill="#1d3550"/>
+              <ellipse cx="13" cy="52" rx="11" ry="14" fill="url(#domeFill)"/>
+              <rect x="11.6" y="18" width="2.8" height="24" fill="#9c7a3c"/><rect x="6" y="25" width="14" height="2.4" fill="#9c7a3c"/>
+              <!-- chapel -->
+              <rect x="300" y="146" width="30" height="26"/>
+              <path d="M296 148 a19 17 0 0 1 38 0 Z" fill="#3a4a55"/>
+              <rect x="313.8" y="116" width="2.4" height="16" fill="#9c7a3c"/><rect x="309" y="121" width="12" height="2" fill="#9c7a3c"/>
+            </g>
+            <g fill="#0b1318"><ellipse cx="40" cy="170" rx="28" ry="13"/><ellipse cx="282" cy="172" rx="22" ry="11"/><ellipse cx="-26" cy="172" rx="18" ry="10"/><ellipse cx="350" cy="172" rx="16" ry="9"/></g>
+            <!-- windows light in order: lower, upper, drum, then bell tower and chapel -->
+            <g fill="#E07A3F" filter="url(#glow)">
+              <rect class="win" x="84" y="134" width="12" height="20" rx="5"/>
+              <rect class="win" x="118" y="134" width="12" height="20" rx="5"/>
+              <rect class="win" x="153" y="128" width="14" height="44" rx="6"/>
+              <rect class="win" x="190" y="134" width="12" height="20" rx="5"/>
+              <rect class="win" x="224" y="134" width="12" height="20" rx="5"/>
+              <rect class="win" x="118" y="82" width="10" height="16" rx="4"/>
+              <rect class="win" x="192" y="82" width="10" height="16" rx="4"/>
+              <rect class="win" x="146" y="16" width="6" height="22" rx="3"/>
+              <rect class="win" x="168" y="16" width="6" height="22" rx="3"/>
+              <rect class="win" x="8" y="112" width="10" height="18" rx="4"/>
+              <rect class="win" x="310" y="154" width="10" height="14" rx="4"/>
+              <ellipse class="win" cx="160" cy="176" rx="150" ry="10" fill-opacity=".22"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="layer" id="spruce">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true" id="spruce-svg"></svg>
+      </div>
+
+      <div class="curtain l" id="curtain-l"></div>
+      <div class="curtain r" id="curtain-r"></div>
+
+      <div class="hint" id="hint"><p data-t="hint">Гортайте вниз</p><span class="line"></span></div>
+      <div class="welcome" id="welcome">
+        <p data-t="welcome">Ласкаво просимо до храму</p>
+        <div class="row">
+          <a class="btn ember" href="notes.html" data-t="ctaNotes">Подати записку</a>
+          <a class="btn ghost" href="https://www.youtube.com/@hankivtsi.cherch/streams" target="_blank" rel="noopener" data-t="ctaWatch">Дивитися Літургію</a>
+        </div>
+      </div>
+      <div class="skip" id="skip"><a class="btn ghost" href="#story" data-t="skip">Пропустити</a></div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="wrap">
+      <div>
+        <p class="figure" id="count" data-to="193">193</p>
+        <p class="figure-cap" data-t="figCap">богослужінь і свят записано на YouTube-каналі храму, щоб молитися разом навіть здалеку</p>
+      </div>
+      <div class="story-text">
+        <p class="label" style="color:var(--ember)" data-t="storyLabel">Про храм</p>
+        <h2><span data-t="storyH1">Дерев’яний храм</span> <em data-t="storyH2">над селом</em></h2>
+        <p data-t="story1">Дерев’яний, хрестоподібний, п’ятикупольний храм, збудований 1865 року на кошти громади. Іконостас 1872 року, робота віденських художників.</p>
+        <p>Настоятель храму: протоієрей Василь Семенюк. При храмі діють братство, сестринство і недільна школа. <a href="history.html">Історія храму</a></p>
+        <dl class="facts">
+          <div><dt>Збудований</dt><dd>1865</dd></div>
+          <div><dt>Настоятель</dt><dd>прот. Василь Семенюк</dd></div>
+          <div><dt data-t="kChurch">Церква</dt><dd data-t="vChurch">Православна церква України</dd></div>
+          <div><dt data-t="kEparchy">Єпархія</dt><dd data-t="vEparchy">Івано-Франківсько-Галицька</dd></div>
+          <div><dt data-t="kFeast">Храмове свято</dt><dd data-t="vFeast">Успіння Пресвятої Богородиці, 15 серпня</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORDS OF THE HIERARCHS -->
+  <section class="words" aria-label="Слова архіпастирів">
+    <div class="wrap">
+      <figure class="word">
+        <blockquote>«…коли ми в темряві засвічуємо лампаду, ліхтарик чи свічку, то навіть найглибша темрява відступає.»</blockquote>
+        <img class="word-photo" src="img/bishops/epifaniy.jpg" alt="Блаженнійший Митрополит Епіфаній" loading="lazy" onerror="this.remove()">
+        <figcaption><b>Блаженнійший Митрополит Київський і всієї України Епіфаній</b><span>Пасхальне послання · <a href="https://pravoslavie.if.ua/news/pashalne-poslannya-predstoyatelya/" target="_blank" rel="noopener">джерело</a></span></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>«Нехай Світло Христового Воскресіння завжди осяює наш земний шлях, розганяючи темряву „світу цього“, морок невіри, сумніву та розпачу.»</blockquote>
+        <img class="word-photo" src="img/bishops/ioasaf.jpg" alt="Митрополит Іоасаф" loading="lazy" onerror="this.remove()">
+        <figcaption><b>Митрополит Івано-Франківський і Галицький Іоасаф</b><span>Пасхальне послання · <a href="https://pravoslavie.if.ua/news/pashalne-poslannya-mytropolyta-ivano-frankivskogo-i-galyczkogo-ioasafa/" target="_blank" rel="noopener">джерело</a></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SERVICES beside a painted window -->
+  <section class="services" id="times">
+    <div class="wrap">
+      <div class="svc-head">
+        <p class="label" style="color:var(--ember)" data-t="svcLabel">Розклад</p>
+        <h2><span data-t="svcH1">Коли ми</span> <em data-t="svcH2">молимося</em></h2>
+        <p data-t="svcLead">Торкніться служби, і вікно покаже, яка тоді година за вікном храму.</p>
+      </div>
+      <ol class="svc-list" id="svc">
+        <li><button type="button" data-scene="0" aria-pressed="false"><span class="n">01</span><span><b data-t="s1">Святкова Літургія</b><small data-t="s1n">У великі свята, вранці</small></span><span class="t ph">[09:00]</span></button></li>
+        <li><button type="button" data-scene="1" aria-pressed="true"><span class="n">02</span><span><b data-t="s2">Божественна Літургія</b><small data-t="s2n">Щонеділі, з трансляцією на YouTube</small></span><span class="t ph">[10:00]</span></button></li>
+        <li><button type="button" data-scene="3" aria-pressed="false"><span class="n">03</span><span><b data-t="s4">Записки онлайн</b><small data-t="s4n">Будь-коли, навіть уночі</small></span><span class="t">24/7</span></button></li>
+      </ol>
+      <div class="week" id="week" hidden>
+        <h3>Цього тижня</h3>
+        <ul id="week-list"></ul>
+      </div>
+      <div class="win-col">
+        <div class="window" id="window" role="img" aria-label="Painted view from a church window">
+          <div class="scene" data-i="0"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="w0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D4E5A"/><stop offset=".55" stop-color="#c9a6a8"/><stop offset=".8" stop-color="#f6cfb2"/></linearGradient></defs><rect width="300" height="400" fill="url(#w0)"/><circle cx="210" cy="250" r="22" fill="#fde3c4" opacity=".9"/><path d="M0 280 Q60 240 120 262 T240 250 T300 262 V400 H0Z" fill="#8e9aa6"/><path d="M0 320 Q80 290 150 310 T300 300 V400 H0Z" fill="#5d6c78"/><path d="M0 360 Q90 335 170 352 T300 345 V400 H0Z" fill="#3D4E5A"/></svg></div>
+          <div class="scene on" data-i="1"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="w1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa3bf"/><stop offset=".7" stop-color="#d6e4ec"/></linearGradient></defs><rect width="300" height="400" fill="url(#w1)"/><circle cx="80" cy="90" r="26" fill="#fffbe8"/><path d="M0 280 Q60 240 120 262 T240 250 T300 262 V400 H0Z" fill="#9fb3a2"/><path d="M0 320 Q80 290 150 310 T300 300 V400 H0Z" fill="#6f8a5e"/><path d="M0 360 Q90 335 170 352 T300 345 V400 H0Z" fill="#4f6a43"/></svg></div>
+          <div class="scene" data-i="2"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="w2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1C2A33"/><stop offset=".45" stop-color="#6d6f80"/><stop offset=".72" stop-color="#e9a98c"/></linearGradient></defs><rect width="300" height="400" fill="url(#w2)"/><circle cx="90" cy="268" r="20" fill="#ffd2a8"/><path d="M0 280 Q60 240 120 262 T240 250 T300 262 V400 H0Z" fill="#7a7385"/><path d="M0 320 Q80 290 150 310 T300 300 V400 H0Z" fill="#4c4f5f"/><path d="M0 360 Q90 335 170 352 T300 345 V400 H0Z" fill="#2c3440"/></svg></div>
+          <div class="scene" data-i="3"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#0f181e"/><g fill="#F8FAFB"><circle cx="40" cy="60" r="1.2"/><circle cx="120" cy="40" r="1"/><circle cx="200" cy="80" r="1.4"/><circle cx="250" cy="30" r="1"/><circle cx="70" cy="140" r="1"/><circle cx="170" cy="150" r="1.2"/><circle cx="260" cy="170" r="1"/></g><circle cx="220" cy="110" r="16" fill="#e8edf0"/><circle cx="214" cy="104" r="16" fill="#0f181e"/><path d="M0 280 Q60 240 120 262 T240 250 T300 262 V400 H0Z" fill="#26343e"/><path d="M0 320 Q80 290 150 310 T300 300 V400 H0Z" fill="#1C2A33"/><rect x="132" y="292" width="5" height="7" fill="#E07A3F"/><path d="M0 360 Q90 335 170 352 T300 345 V400 H0Z" fill="#121c22"/></svg></div>
+          <div class="mullion"></div>
+        </div>
+        <p class="window-cap" id="window-cap" data-t="w1">Полудень, недільна Літургія</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATRONAL FEAST -->
+  <section class="feast" id="feast">
+    <div class="wrap">
+      <div class="feast-card">
+        <svg class="hills" viewBox="0 0 400 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 Q100 40 200 70 T400 60 V180 H0Z" fill="#8fa77a"/><path d="M0 120 Q120 90 230 115 T400 105 V180 H0Z" fill="#5f7a4c"/></svg>
+        <div class="feast-copy">
+          <p class="label">Храмове свято · 15 серпня</p>
+          <h2>Успіння <em>Пресвятої Богородиці</em></h2>
+          <p>Наш храм святкує храмове свято 15 серпня. <span class="ph">[час і програма свята]</span></p>
+        </div>
+        <div class="age" aria-live="polite">
+          <p class="age-num" id="age-num">162</p>
+          <p class="age-cap" id="age-cap">роки виповниться храму 15 серпня 2027 року</p>
+          <p class="age-next" id="age-next"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARISH LIFE -->
+  <section class="life" id="life">
+    <div class="wrap">
+      <div class="life-head">
+        <p class="label" style="color:var(--ember)">Життя парафії</p>
+        <h2>Неділя <em>в нашому храмі</em></h2>
+        <p>Фото з богослужінь. Нові додаватимуть адміністратор і фотограф храму.</p>
+      </div>
+      <div class="life-grid">
+        <figure class="shot"><img src="img/life/sunday-1.jpg" alt="Недільне богослужіння в храмі" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove()"><figcaption>Недільна Літургія</figcaption></figure>
+        <figure class="shot"><img src="img/life/sunday-2.jpg" alt="Парафіяни на подвір’ї храму" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove()"><figcaption>Подвір’я храму</figcaption></figure>
+        <a class="shot live-card" href="https://www.youtube.com/@hankivtsi.cherch/streams" target="_blank" rel="noopener">
+          <span class="live-dot"></span>
+          <b>Трансляції Літургії</b>
+          <span>Щонеділі на YouTube-каналі храму</span>
+        </a>
+      </div>
+      <a class="btn dark" href="gallery.html" style="justify-self:start">Усі фотоальбоми</a>
+    </div>
+  </section>
+
+  <!-- WAY HERE -->
+  <section class="way" id="way">
+    <div class="wrap">
+      <div class="map" id="map">
+        <iframe title="Карта: село Ганьківці" src="https://www.google.com/maps?q=%D0%93%D0%B0%D0%BD%D1%8C%D0%BA%D1%96%D0%B2%D1%86%D1%96%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div style="display:grid;gap:18px">
+        <p class="label" style="color:var(--ember)" data-t="wayLabel">Де нас знайти</p>
+        <h2><span data-t="wayH1">Дорога</span> <em data-t="wayH2">до храму</em></h2>
+        <p style="color:var(--muted)"><span data-t="wayP">Село Ганьківці, Івано-Франківська область.</span> <span class="ph" data-t="phAddr">[точна адреса]</span></p>
+        <a class="btn dark" style="justify-self:start" href="https://www.google.com/maps/search/?api=1&query=%D0%93%D0%B0%D0%BD%D1%8C%D0%BA%D1%96%D0%B2%D1%86%D1%96%20%D1%85%D1%80%D0%B0%D0%BC%20%D0%A3%D1%81%D0%BF%D1%96%D0%BD%D0%BD%D1%8F" target="_blank" rel="noopener" data-t="openMap">Відкрити в Google Картах</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CHURCH, EPARCHY, DEANERY, CONTACTS -->
+  <section class="church-info" id="contacts">
+    <div class="wrap">
+      <h2>Наша <em>Церква</em></h2>
+      <div class="info-grid">
+        <article>
+          <p class="label">Церква</p>
+          <h3>Православна Церква України</h3>
+          <p>Помісна Церква, що постала в єдності на Об’єднавчому Соборі 15 грудня 2018 року в Софії Київській. Предстоятель: Блаженнійший Митрополит Київський і всієї України Епіфаній.</p>
+          <a href="https://www.pomisna.info/" target="_blank" rel="noopener">Сайт Київської Митрополії</a>
+        </article>
+        <article>
+          <p class="label">Єпархія</p>
+          <h3>Івано-Франківська єпархія</h3>
+          <p>Правлячий архієрей: митрополит Івано-Франківський і Галицький Іоасаф.</p>
+          <a href="https://pravoslavie.if.ua/" target="_blank" rel="noopener">Сайт єпархії</a>
+        </article>
+        <article>
+          <p class="label">Благочиння</p>
+          <h3>Снятинське благочиння</h3>
+          <p>Благочинний: протоієрей Михаїл Марусяк. Наш храм за 18 км від Снятина і за 95 км від Івано-Франківська.</p>
+          <a href="https://pravoslavie.if.ua/eparchy/blagochinnja/snyatynske-blagochynnya/" target="_blank" rel="noopener">Парафії благочиння</a>
+        </article>
+      </div>
+      <div class="contacts">
+        <h3>Контакти</h3>
+        <p>с. Ганьківці, вул. <span class="ph" id="c-street">[назва вулиці]</span>, Івано-Франківська область</p>
+        <p>Пошта храму: <span class="ph" id="c-email">[e-mail храму]</span></p>
+        <p id="c-phone-row" hidden>Телефон: <span id="c-phone"></span></p>
+        <p>Настоятель: протоієрей Василь Семенюк</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <canvas id="footer-stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h2><span data-t="fH1">Храм Успіння</span> <em data-t="fH2">Пресвятої Богородиці</em></h2>
+    <p data-t="fAddr">Православна церква України · село Ганьківці, Івано-Франківська область</p>
+    <div class="links">
+      <a class="btn ghost" href="https://www.youtube.com/@hankivtsi.cherch" target="_blank" rel="noopener">YouTube</a>
+      <a class="btn ghost" href="#times" data-t="fTimes">Розклад</a>
+      <a class="btn ghost" href="history.html">Історія</a>
+      <a class="btn ghost" href="notes.html">Записки</a>
+      <a class="btn ghost" href="#contacts">Контакти</a>
+    </div>
+    <small data-t="fNote">Перший варіант сайту. Позначене [у дужках] заповнимо разом.</small>
+  </div>
+</footer>
+
+<script>
+/* ---------- Words come from the page; extra phrases here ---------- */
+const nodes = [...document.querySelectorAll("[data-t]")], UK = {};
+nodes.forEach(n => { UK[n.dataset.t] = n.textContent; });
+Object.assign(UK, { w0: "Світанок, святкова Літургія", w1: "Полудень, недільна Літургія", w3: "Ніч, записки онлайн" });
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const t = k => UK[k] ?? k;
+const sizeBtn = document.getElementById("size-btn");
+function setBig(on) { document.documentElement.classList.toggle("big", on); sizeBtn.setAttribute("aria-pressed", on); store.set("church-big", on ? "1" : "0"); }
+sizeBtn.onclick = () => setBig(!document.documentElement.classList.contains("big"));
+setBig(store.get("church-big") === "1");
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ease = x => 1 - Math.pow(1 - x, 3);
+
+/* ---------- Painting the ranges ---------- */
+function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+function ridgeLine(n, seed, freqs, ridged) {
+  const r = rng(seed), pts = freqs.map(f => Array.from({ length: f + 2 }, r));
+  return Array.from({ length: n }, (_, x) => {
+    let h = 0, a = 1, tot = 0;
+    freqs.forEach((f, i) => {
+      const u = x / (n - 1) * f, i0 = Math.floor(u), fr = u - i0, s = fr * fr * (3 - 2 * fr);
+      let v = pts[i][i0] * (1 - s) + pts[i][i0 + 1] * s;
+      if (ridged) v = 1 - Math.abs(2 * v - 1);
+      h += a * v; tot += a; a *= .5;
+    });
+    return h / tot;
+  });
+}
+const hex = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+const mix = (a, b, k) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
+function sizeCanvas(c) {
+  const dpr = Math.min(devicePixelRatio || 1, 1.5), w = c.clientWidth, h = c.clientHeight;
+  c.width = Math.max(1, Math.round(w * dpr)); c.height = Math.max(1, Math.round(h * dpr));
+  const ctx = c.getContext("2d"); ctx.setTransform(1, 0, 0, 1, 0, 0); return { ctx, w: c.width, h: c.height, v: c.height / ("tall" in c.dataset ? 1.7 : 1) };
+}
+// Columns shaded by slope: faces turned toward the low western sun catch light; high far faces carry pink snow
+function paintRange(id, o) {
+  const c = document.getElementById(id), { ctx, w, h } = sizeCanvas(c);
+  const line = ridgeLine(w, o.seed, o.freqs, o.ridged), top = h * o.top, amp = h * o.amp;
+  const ys = line.map(v => top + (1 - v) * amp);
+  const shadow = hex(o.shadow), lit = hex(o.lit), snowL = o.snow && hex(o.snow[0]), snowS = o.snow && hex(o.snow[1]);
+  // Light per column from the smoothed slope, so faces read as broad planes rather than stripes
+  const raw = ys.map((y, x) => clamp(.5 - (ys[Math.min(w - 1, x + 3)] - ys[Math.max(0, x - 3)]) / 6 * o.contrast * (900 / h)));
+  const R = Math.round(w / 160), k = raw.map((_, x) => { let s = 0, n = 0; for (let i = -R; i <= R; i++) { const v = raw[x + i]; if (v !== undefined) { s += v; n++; } } return s / n; });
+  ctx.beginPath(); ctx.moveTo(0, h); ys.forEach((y, x) => ctx.lineTo(x, y)); ctx.lineTo(w, h); ctx.closePath();
+  ctx.fillStyle = `rgb(${shadow})`; ctx.fill();
+  const band = amp * .9;
+  for (let x = 0; x < w; x++) {
+    const c = mix(shadow, lit, k[x]);
+    for (let j = 0; j < 4; j++) {
+      ctx.fillStyle = `rgba(${c},${(.85 - j * .2) * k[x]})`;
+      ctx.fillRect(x, ys[x] + band * j / 4, 1, band / 4 + 1);
+    }
+    if (o.snow && ys[x] < top + amp * o.snowline) {
+      const depth = (top + amp * o.snowline - ys[x]) * .5;
+      ctx.fillStyle = `rgb(${mix(snowS, snowL, k[x])})`;
+      ctx.fillRect(x, ys[x], 1, depth);
+    }
+  }
+  ctx.globalCompositeOperation = "source-atop";
+  const g = ctx.createLinearGradient(0, top, 0, h);
+  g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(o.hazeAt, o.haze); g.addColorStop(1, o.haze);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  ctx.globalCompositeOperation = "source-over";
+}
+// Peaks as painted planes: the west face catches the last light, the east face falls into shadow, snow caps the tops
+function paintPeaks(id, o) {
+  const c = document.getElementById(id), { ctx, w, h, v } = sizeCanvas(c), r = rng(o.seed);
+  const lit = hex(o.lit), shadow = hex(o.shadow);
+  const jag = (a, b, n, amt) => { const pts = [a]; for (let i = 1; i < n; i++) { const k = i / n; pts.push([a[0] + (b[0] - a[0]) * k + (r() - .5) * amt, a[1] + (b[1] - a[1]) * k + (r() - .5) * amt * .6]); } pts.push(b); return pts; };
+  const peaks = Array.from({ length: o.count }, (_, i) => {
+    const x = (i + r() * .8) / o.count * w * 1.15 - w * .08, ay = v * (o.top + r() * o.amp), hw = (v - ay) * (o.spread[0] + r() * o.spread[1]);
+    return { x, ay, hw, sx: x + (r() - .3) * hw * .35 };
+  }).sort((a, b) => a.ay - b.ay);
+  const fillPoly = (pts, col) => { ctx.beginPath(); pts.forEach(([px, py], i) => i ? ctx.lineTo(px, py) : ctx.moveTo(px, py)); ctx.closePath(); ctx.fillStyle = col; ctx.fill(); };
+  peaks.forEach(p => {
+    const apex = [p.x, p.ay], L = [p.x - p.hw * h / v, h], R = [p.x + p.hw * h / v, h], S = [p.sx, h], amt = p.hw * .12;
+    const left = jag(apex, L, 7, amt), split = jag(apex, S, 5, amt * .7), right = jag(apex, R, 7, amt);
+    const shade = .1 + r() * .25;
+    fillPoly([...left, ...split.slice().reverse()], `rgb(${mix(lit, shadow, shade)})`);
+    fillPoly([...split, ...right.slice().reverse()], `rgb(${mix(shadow, lit, shade * .5)})`);
+    if (o.snow) {
+      const cap = o.snowDepth * (v - p.ay), y = p.ay + cap;
+      const edge = (pts) => pts.filter(q => q[1] <= y + (r() - .5) * cap * .5);
+      const ls = edge(left), ss = edge(split), rs = edge(right);
+      if (ls.length > 1 && ss.length > 1) fillPoly([...ls, ...ss.slice().reverse()], o.snow[0]);
+      if (rs.length > 1 && ss.length > 1) fillPoly([...ss, ...rs.slice().reverse()], o.snow[1]);
+    }
+  });
+  ctx.globalCompositeOperation = "source-atop";
+  const g = ctx.createLinearGradient(0, v * o.top, 0, v);
+  g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(o.hazeAt, o.haze); g.addColorStop(1, o.haze);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  ctx.globalCompositeOperation = "source-over";
+}
+// Rolling foothills: a smooth silhouette lit from the west along its crest, darkening into the valley
+function paintHills(id, o) {
+  const c = document.getElementById(id), { ctx, w, h, v: vh } = sizeCanvas(c);
+  const line = ridgeLine(w, o.seed, o.freqs, false), ys = line.map(v => vh * o.top + (1 - v) * vh * o.amp);
+  const path = () => { ctx.beginPath(); ctx.moveTo(0, h); ys.forEach((y, x) => ctx.lineTo(x, y)); ctx.lineTo(w, h); ctx.closePath(); };
+  const g = ctx.createLinearGradient(0, vh * o.top, 0, vh);
+  g.addColorStop(0, o.lit); g.addColorStop(.35, o.shadow); g.addColorStop(1, o.shadow);
+  path(); ctx.fillStyle = g; ctx.fill();
+  ctx.save(); path(); ctx.clip();
+  const side = ctx.createLinearGradient(0, 0, w, 0);
+  side.addColorStop(0, "rgba(246,200,180,.22)"); side.addColorStop(.5, "rgba(246,200,180,0)"); side.addColorStop(1, "rgba(15,24,30,.25)");
+  ctx.fillStyle = side; ctx.fillRect(0, 0, w, h);
+  const haze = ctx.createLinearGradient(0, vh * o.top, 0, vh);
+  haze.addColorStop(0, "rgba(221,227,230,0)"); haze.addColorStop(o.hazeAt, o.haze); haze.addColorStop(1, o.haze);
+  ctx.fillStyle = haze; ctx.fillRect(0, 0, w, h);
+  ctx.restore();
+}
+function paintClouds() {
+  const { ctx, w, h, v } = sizeCanvas(document.getElementById("clouds")), r = rng(7);
+  const band = ctx.createLinearGradient(0, v * .6, 0, v);
+  band.addColorStop(0, "rgba(246,214,200,0)"); band.addColorStop(.3, "rgba(240,210,200,.4)"); band.addColorStop(.7, "rgba(221,227,230,.85)"); band.addColorStop(1, "rgba(221,227,230,.95)");
+  ctx.fillStyle = band; ctx.fillRect(0, v * .6, w, h);
+  for (let i = 0; i < 55; i++) {
+    const x = r() * w, y = v * (.62 + r() * .3), rx = w * (.06 + r() * .14), ry = rx * (.2 + r() * .1);
+    const g = ctx.createRadialGradient(x, y - ry * .4, 0, x, y, rx);
+    const warm = y < v * .68;
+    g.addColorStop(0, warm ? "rgba(255,226,214,.75)" : "rgba(248,250,251,.7)");
+    g.addColorStop(.6, warm ? "rgba(240,200,190,.3)" : "rgba(221,227,230,.3)");
+    g.addColorStop(1, "rgba(221,227,230,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill();
+  }
+}
+function paintStars(id, count) {
+  const { ctx, w, h } = sizeCanvas(document.getElementById(id)), r = rng(11);
+  for (let i = 0; i < count; i++) {
+    const s = r() * 1.4 + .3; ctx.globalAlpha = .4 + r() * .6; ctx.fillStyle = "#F8FAFB";
+    ctx.beginPath(); ctx.arc(r() * w, r() * h * .7, s, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+function paintSpruce() {
+  const svg = document.getElementById("spruce-svg"), r = rng(23); let out = "";
+  const tree = (x, base, hgt, col) => {
+    const w = hgt * .32; let d = `M${x} ${base - hgt}`;
+    for (let i = 0; i < 6; i++) { const yy = base - hgt + hgt * (i + 1) / 6, ww = w * (i + 1) / 6; d += ` L${x + ww} ${yy} L${x + ww * .55} ${yy}`; }
+    d += ` L${x + w * .12} ${base} L${x - w * .12} ${base}`;
+    for (let i = 5; i >= 0; i--) { const yy = base - hgt + hgt * (i + 1) / 6, ww = w * (i + 1) / 6; d += ` L${x - ww * .55} ${yy} L${x - ww} ${yy}`; }
+    return `<path d="${d}Z" fill="${col}"/>`;
+  };
+  [[-40, 260], [60, 330], [150, 230], [230, 300], [1210, 300], [1290, 240], [1370, 340], [1460, 260]].forEach(([x, hg]) => { out += tree(x + (r() - .5) * 30, 920, hg + r() * 60, "#0b1318"); });
+  [[20, 200], [300, 170], [1150, 190], [1420, 210]].forEach(([x, hg]) => { out += tree(x, 930, hg, "#070d11"); });
+  [[488, 150], [952, 170]].forEach(([x, hg]) => { out += tree(x, 930, hg, "#070d11"); });
+  svg.innerHTML = out;
+}
+function paintFence() {
+  const g = document.getElementById("fence"); let d = "", rail1 = "", rail2 = "";
+  for (let x = 450; x <= 1020; x += 15) {
+    const y = 644 - 20 * (1 - Math.pow((x - 735) / 285, 2));
+    if (x > 700 && x < 770) continue;
+    d += `M${x} ${y} v-18 `;
+    rail1 += `${rail1 ? "L" : "M"}${x} ${y - 13} `; rail2 += `${rail2 ? "L" : "M"}${x} ${y - 5} `;
+  }
+  g.innerHTML = `<path d="${d}"/><path d="${rail1}" stroke-width="2"/><path d="${rail2}" stroke-width="2"/>`;
+}
+paintFence();
+function paintAll() {
+  paintStars("stars", 220);
+  paintStars("footer-stars", 140);
+}
+paintSpruce();
+
+/* ---------- Scroll: the view sinks, night falls, fog parts, the church lights ---------- */
+const hero = document.getElementById("hero"), layers = [...document.querySelectorAll(".layer[data-speed]")];
+const night = document.getElementById("night"), starsL = document.getElementById("stars-layer"), headline = document.getElementById("headline");
+const painting = document.getElementById("painting"), near = document.getElementById("near"), spruce = document.getElementById("spruce"), cl = document.getElementById("curtain-l"), cr = document.getElementById("curtain-r");
+const wins = [...document.querySelectorAll("#church .win")], hint = document.getElementById("hint"), welcome = document.getElementById("welcome"), skip = document.getElementById("skip"), bar = document.getElementById("bar");
+let ticking = false;
+function frame() {
+  ticking = false;
+  const vh = innerHeight, total = hero.offsetHeight - vh, p = reduce ? 1 : clamp(scrollY / total);
+  layers.forEach(l => { l.style.transform = `translate3d(0, ${-p * parseFloat(l.dataset.speed) * vh * .9}px, 0)`; });
+  painting.style.transform = `translate3d(0, ${-p * .08 * vh}px, 0) scale(${1 + p * .18})`;
+  painting.style.opacity = 1 - clamp((p - .3) / .3);
+  headline.style.transform = `translate3d(0, ${-p * .22 * vh}px, 0)`;
+  headline.style.opacity = 1 - clamp((p - .12) / .2);
+  night.style.opacity = clamp((p - .12) / .5);
+  starsL.style.opacity = clamp((p - .3) / .4);
+  const rise = ease(clamp(p / .55));
+  near.style.transform = `translate3d(0, ${(1 - rise) * vh}px, 0)`;
+  spruce.style.transform = `translate3d(0, ${(1 - ease(clamp((p - .5) / .35))) * vh}px, 0)`;
+  const part = ease(clamp((p - .28) / .32));
+  cl.style.transform = `translate3d(${-part * 70}vw, 0, 0)`; cr.style.transform = `translate3d(${part * 70}vw, 0, 0)`;
+  cl.style.opacity = cr.style.opacity = clamp((p - .15) / .15) * (1 - part * .9);
+  wins.forEach((w, i) => w.classList.toggle("lit", p > .58 + i * .025));
+  hint.style.opacity = 1 - clamp(p / .08);
+  welcome.classList.toggle("on", p > .9);
+  skip.style.opacity = p > .85 ? 0 : 1; skip.style.pointerEvents = p > .85 ? "none" : "auto";
+  bar.classList.toggle("solid", scrollY > hero.offsetHeight - vh);
+}
+addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { paintAll(); frame(); }, 200); });
+if (reduce) { cl.hidden = cr.hidden = true; }
+
+/* ---------- Counter ---------- */
+const count = document.getElementById("count");
+new IntersectionObserver((es, ob) => es.forEach(e => {
+  if (!e.isIntersecting || reduce) return;
+  ob.disconnect(); const to = +count.dataset.to, t0 = performance.now();
+  const step = now => { const k = ease(clamp((now - t0) / 1800)); count.textContent = Math.round(to * k); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}), { threshold: .5 }).observe(count);
+
+/* ---------- Window scenes ---------- */
+const scenes = [...document.querySelectorAll(".window .scene")];
+let scene = 1;
+Object.assign(UK, { w2: "Захід сонця" });
+function updateWindowCap() { const cap = document.getElementById("window-cap"); cap.dataset.t = "w" + scene; cap.textContent = t("w" + scene); }
+function bindServices() {
+  const btns = [...document.querySelectorAll("#svc button")];
+  btns.forEach(b => b.addEventListener("click", () => {
+    scene = +b.dataset.scene;
+    btns.forEach(x => x.setAttribute("aria-pressed", x === b));
+    scenes.forEach(s => s.classList.toggle("on", +s.dataset.i === scene));
+    updateWindowCap();
+  }));
+}
+bindServices();
+
+/* ---------- Schedule and contacts from the admin's data files ---------- */
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const DAY_NAMES = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п’ятниця", "субота"];
+const MONTHS_OF = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+async function loadJSON(path) { try { const r = await fetch(path, { cache: "no-store" }); return r.ok ? await r.json() : null; } catch (e) { return null; } }
+const sceneFor = time => { const h = parseInt(time, 10); return isNaN(h) ? 1 : h < 9 ? 0 : h < 15 ? 1 : h < 20 ? 2 : 3; };
+async function loadData() {
+  const svc = await loadJSON("content/services.json");
+  if (svc && Array.isArray(svc.regular) && svc.regular.length) {
+    const rows = svc.regular.map((s, i) => `<li><button type="button" data-scene="${sceneFor(s.time)}" aria-pressed="${i === svc.regular.length - 1}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span><b>${esc(s.title)}</b><small>${esc(s.day)}${s.note ? ", " + esc(s.note) : ""}</small></span><span class="t">${esc(s.time)}</span></button></li>`);
+    rows.push(`<li><button type="button" data-scene="3" aria-pressed="false"><span class="n">${String(rows.length + 1).padStart(2, "0")}</span><span><b>Записки онлайн</b><small>Будь-коли, навіть уночі</small></span><span class="t">24/7</span></button></li>`);
+    document.getElementById("svc").innerHTML = rows.join("");
+    bindServices();
+    scene = sceneFor(svc.regular[svc.regular.length - 1].time);
+    scenes.forEach(s => s.classList.toggle("on", +s.dataset.i === scene));
+    updateWindowCap();
+  }
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const week = (svc && Array.isArray(svc.week) ? svc.week : [])
+    .filter(s => s.date && new Date(s.date + "T00:00") >= today)
+    .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time)).slice(0, 8);
+  if (week.length) {
+    document.getElementById("week-list").innerHTML = week.map(s => {
+      const d = new Date(s.date + "T00:00");
+      return `<li><b>${d.getDate()} ${MONTHS_OF[d.getMonth()]}, ${esc(s.time)}</b><div>${esc(s.title)}<br><span>${DAY_NAMES[d.getDay()]}${s.note ? " · " + esc(s.note) : ""}</span></div></li>`;
+    }).join("");
+    document.getElementById("week").hidden = false;
+  }
+  const site = await loadJSON("content/site.json");
+  if (site) {
+    const fill = (id, v) => { if (v) { const el = document.getElementById(id); el.textContent = v; el.classList.remove("ph"); } };
+    fill("c-street", site.street); fill("c-email", site.email);
+    if (site.phone) { document.getElementById("c-phone").textContent = site.phone; document.getElementById("c-phone-row").hidden = false; }
+  }
+}
+
+
+
+/* ---------- The church's age at the next patronal feast ---------- */
+function plural(n, one, few, many) { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; }
+function startFeast() {
+  const now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let year = now.getFullYear(), feast = new Date(year, 7, 15);
+  if (today > feast) { year++; feast = new Date(year, 7, 15); }
+  const age = year - 1865, days = Math.round((feast - today) / 864e5);
+  document.getElementById("age-num").textContent = age;
+  document.getElementById("age-cap").textContent = days === 0
+    ? `${plural(age, "рік", "роки", "років")} виповнюється храму сьогодні`
+    : `${plural(age, "рік", "роки", "років")} виповниться храму 15 серпня ${year} року`;
+  document.getElementById("age-next").textContent = days === 0 ? "Зі святом!" : `До храмового свята ${days} ${plural(days, "день", "дні", "днів")}`;
+}
+
+paintAll();
+updateWindowCap();
+startFeast();
+loadData();
+frame();
+</script>
+</body>
+</html>

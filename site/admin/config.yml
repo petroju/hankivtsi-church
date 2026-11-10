@@ -1,0 +1,85 @@
+# Admin panel for the church site (Sveltia CMS).
+# Everything edited here is saved as files in the GitHub repository; the site reads them.
+# GitHub repository: petroju/hankivtsi-church
+backend:
+  name: github
+  repo: petroju/hankivtsi-church
+  branch: main
+
+locale: uk
+# site_url: https://... (add once the site has its internet address)
+
+media_folder: site/img/uploads
+public_folder: /img/uploads
+
+collections:
+  - name: services
+    label: Розклад
+    description: Постійний розклад і служби на цей тиждень. Сайт показує служби, дата яких ще не минула.
+    files:
+      - name: services
+        label: Розклад богослужінь
+        file: site/content/services.json
+        fields:
+          - name: regular
+            label: Постійний розклад
+            label_singular: службу
+            widget: list
+            summary: "{{fields.day}} · {{fields.time}} · {{fields.title}}"
+            fields:
+              - { name: day, label: Коли (напр. «неділя», «у свята»), widget: string }
+              - { name: time, label: Час (напр. 10:00), widget: string, pattern: ['^\d{1,2}:\d{2}$', 'Формат часу: 10:00'] }
+              - { name: title, label: Служба, widget: string }
+              - { name: note, label: Примітка, widget: string, required: false }
+          - name: week
+            label: Служби на цей тиждень
+            label_singular: службу
+            widget: list
+            required: false
+            summary: "{{fields.date}} {{fields.time}} · {{fields.title}}"
+            fields:
+              - { name: date, label: Дата, widget: datetime, time_format: false, date_format: "DD.MM.YYYY", format: "YYYY-MM-DD" }
+              - { name: time, label: Час, widget: string, pattern: ['^\d{1,2}:\d{2}$', 'Формат часу: 10:00'] }
+              - { name: title, label: Служба або свято, widget: string }
+              - { name: note, label: Примітка, widget: string, required: false }
+
+  - name: gallery
+    label: Фотоальбоми
+    description: Альбоми зі служб і свят. Сайт групує їх за роками.
+    files:
+      - name: gallery
+        label: Усі альбоми
+        file: site/content/gallery.json
+        fields:
+          - name: albums
+            label: Альбоми
+            label_singular: альбом
+            widget: list
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - { name: title, label: Назва (напр. «Великдень»), widget: string }
+              - { name: date, label: Дата, widget: datetime, time_format: false, date_format: "DD.MM.YYYY", format: "YYYY-MM-DD" }
+              - name: kind
+                label: Подія
+                widget: select
+                options: [Недільна Літургія, Великдень, Різдво Христове, Храмове свято, Інше свято, Життя парафії]
+                default: Недільна Літургія
+              - { name: text, label: Короткий опис, widget: text, required: false }
+              - name: photos
+                label: Фото
+                label_singular: фото
+                widget: list
+                fields:
+                  - { name: image, label: Фото, widget: image }
+                  - { name: caption, label: Підпис, widget: string, required: false }
+
+  - name: site
+    label: Контакти
+    files:
+      - name: site
+        label: Контакти храму
+        file: site/content/site.json
+        fields:
+          - { name: street, label: Вулиця, widget: string, required: false }
+          - { name: email, label: Пошта храму, widget: string, required: false }
+          - { name: phone, label: Телефон, widget: string, required: false }

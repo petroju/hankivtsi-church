@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Історія храму — Храм Успіння, Ганьківці</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..600;1,7..72,200..500&family=Commissioner:wght@400;500;600&display=swap">
+<style>
+/* History: a photo opening, the church's age, then a timeline running down from 1865 to today. */
+:root {
+  --night: #1C2A33; --slate: #3D4E5A; --fog: #DDE3E6; --snow: #F8FAFB; --ember: #E07A3F;
+  --ink: #1C2A33; --muted: #4c5c67;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "Commissioner", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.22, 1.2, .36, 1);
+  --float: 0 2px 4px rgb(15 24 30 / .2), 0 24px 60px -20px rgb(15 24 30 / .55);
+  font-size: 112.5%; color-scheme: light;
+}
+:root.big { font-size: 131.25%; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--snow); color: var(--ink); font-family: var(--font-body); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; letter-spacing: -.03em; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 em, h2 em { font-style: italic; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.ph { background: rgb(224 122 63 / .14); border-bottom: 1px dashed var(--ember); padding: 0 .2em; border-radius: 3px; }
+.label { font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ember); }
+
+.bar { position: fixed; left: 0; right: 0; top: 0; z-index: 40; color: var(--snow); padding-top: env(safe-area-inset-top, 0px); transition: background-color .4s ease; }
+.bar.solid { background: rgb(28 42 51 / .94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.bar .wrap { display: flex; align-items: center; gap: 8px; padding-block: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; min-width: 0; text-shadow: 0 1px 12px rgb(15 24 30 / .5); }
+.brand b { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; white-space: nowrap; }
+.tool { min-width: 48px; min-height: 48px; padding: 0 12px; border-radius: 999px; cursor: pointer; flex: none; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+  border: 1px solid rgb(248 250 251 / .4); background: rgb(15 24 30 / .35); color: var(--snow); font: 600 .95rem var(--font-body); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .4s var(--ease); }
+.tool:hover { transform: translateY(-1px); }
+.tool:active { transform: scale(.95); }
+.tool[aria-pressed="true"], .tool[aria-current="page"] { background: var(--snow); color: var(--night); }
+@media (max-width: 440px) { .brand b { display: none; } }
+
+.opening { position: relative; min-height: min(78svh, 40rem); display: grid; align-items: end; overflow: hidden; color: var(--snow); background: var(--night); }
+.opening img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 35% 50%; animation: slow 30s ease-in-out infinite alternate; }
+@keyframes slow { to { transform: scale(1.08); } }
+.opening::before { content: ""; position: absolute; inset: 0; z-index: 1; background: #3D4E5A; mix-blend-mode: multiply; opacity: .45; }
+.opening::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(15 24 30 / .85), transparent 65%); }
+.opening .wrap { position: relative; z-index: 2; padding-block: 120px 48px; display: grid; gap: 12px; }
+.opening .label { color: #f3b48c; }
+.opening h1 { font-size: clamp(3rem, 11vw, 6.6rem); font-weight: 200; }
+.opening p { max-width: 46ch; font-size: 1.1rem; opacity: .92; }
+
+.age { padding-block: clamp(64px, 10vw, 120px); background: radial-gradient(60% 60% at 90% 0%, rgb(221 227 230 / .8), transparent 70%), var(--snow); }
+.age .wrap { display: grid; gap: 28px; }
+.age-num { font-family: var(--font-display); font-weight: 200; letter-spacing: -.05em; line-height: .85; font-size: clamp(7rem, 30vw, 17rem); font-variant-numeric: tabular-nums lining-nums; }
+.age-cap { color: var(--muted); max-width: 30ch; margin-top: 16px; font-size: 1.1rem; }
+.facts { display: grid; margin: 0; align-self: end; }
+.facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 16px; padding-block: 14px; border-top: 1px solid rgb(61 78 90 / .18); }
+.facts dt { color: var(--muted); font-size: .92rem; }
+.facts dd { margin: 0; font-weight: 500; }
+
+.timeline { padding-block: clamp(64px, 10vw, 120px); background: var(--fog); }
+.timeline h2 { font-size: clamp(2.2rem, 7vw, 4.2rem); margin-bottom: 40px; }
+.timeline ol { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 36px; }
+.timeline ol::before { content: ""; position: absolute; left: 6.6rem; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--ember), rgb(61 78 90 / .25)); }
+.timeline li { display: grid; grid-template-columns: 6rem 1fr; gap: 2.2rem; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: calc(6.6rem - 6px); top: .75em; width: 14px; height: 14px; border-radius: 50%; background: var(--snow); border: 3px solid var(--ember); }
+.timeline .yr { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; text-align: right; font-variant-numeric: tabular-nums; line-height: 1.6; }
+.timeline h3 { font-size: 1.5rem; font-weight: 400; margin-bottom: 6px; }
+.timeline li p { color: var(--muted); max-width: 54ch; }
+
+.story { padding-block: clamp(64px, 10vw, 120px); }
+.story .wrap { display: grid; gap: 32px; align-items: center; }
+.story .photo { border-radius: 26px; overflow: hidden; box-shadow: var(--float); aspect-ratio: 4 / 3; }
+.story .photo img { width: 100%; height: 100%; object-fit: cover; }
+.story .copy { display: grid; gap: 16px; max-width: 56ch; }
+.story h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+
+footer { color: var(--snow); background: linear-gradient(180deg, #1C2A33, #0a1116); padding-block: 48px calc(40px + env(safe-area-inset-bottom, 0px)); }
+footer .wrap { display: grid; gap: 10px; }
+@media (min-width: 820px) { .age .wrap, .story .wrap { grid-template-columns: 1fr 1fr; } }
+@media (prefers-reduced-motion: reduce) { .opening img { animation: none; } .tool, .bar { transition: none; } }
+</style>
+</head>
+<body>
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 28h26M8 28v-8h18v8M4 20l5-4h16l5 4M11 16v-4h12v4M14 12V9h6v3M13 9l4-5 4 5M17 4V1M15.5 2.2h3M10 12l1.5-2.2L13 12M21 12l1.5-2.2L24 12M15.5 28v-4h3v4"/></svg>
+      <b>Храм Успіння</b>
+    </a>
+    <button type="button" class="tool" id="size-btn" aria-pressed="false" aria-label="Більший шрифт">Aa</button>
+    <a class="tool" href="history.html" aria-current="page">Історія</a>
+    <a class="tool" href="gallery.html">Фото</a>
+    <a class="tool" href="notes.html">Записки</a>
+  </div>
+</header>
+
+<main>
+  <section class="opening">
+    <img src="img/hero.webp" alt="Хресна хода з хоругвами вздовж дерев’яних стін храму">
+    <div class="wrap">
+      <p class="label">Храм Успіння Пресвятої Богородиці</p>
+      <h1>Історія <em>храму</em></h1>
+      <p>Дерев’яний, хрестоподібний, п’ятикупольний храм у селі Ганьківці стоїть з 1865 року.</p>
+    </div>
+  </section>
+
+  <section class="age">
+    <div class="wrap">
+      <div>
+        <p class="age-num" id="age-num">161</p>
+        <p class="age-cap" id="age-cap">рік храму</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Збудований</dt><dd>1865</dd></div>
+        <div><dt>Настоятель</dt><dd>протоієрей Василь Семенюк (з 2018)</dd></div>
+        <div><dt>Церква</dt><dd>Православна церква України</dd></div>
+        <div><dt>Єпархія</dt><dd>Івано-Франківсько-Галицька</dd></div>
+        <div><dt>Храмове свято</dt><dd>Успіння Пресвятої Богородиці, 15 серпня</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="wrap">
+      <h2>Від <em>1865</em> до сьогодні</h2>
+      <ol>
+        <li><span class="yr">1832</span><div><h3>Перші відомості</h3><p>Опікуном парафії був Каєтан Петрович, служив священик Якуб Кнігіницький із Задубрівців.</p></div></li>
+        <li><span class="yr">1865</span><div><h3>Храм збудовано</h3><p>Дерев’яний, хрестоподібний, п’ятикупольний храм збудовано на кошти громади. Поруч стоїть дерев’яна дзвіниця.</p></div></li>
+        <li><span class="yr">1872</span><div><h3>Іконостас</h3><p>Для храму придбано іконостас, роботу віденських художників.</p></div></li>
+        <li><span class="yr">1887–1935</span><div><h3>Настоятелі та опікуни</h3><p>Служили священики Лев Глібовицький (1887), Григорій Федюк (1900–1925), Лев Крушельницький (1935). Опікункою парафії була Марія Чайковська (1887, 1900), згодом її наступники (1925–1935).</p></div></li>
+        <li><span class="yr">2002</span><div><h3>Новий престол</h3><p>Єпископ Іоасаф встановив і освятив у храмі новий престол.</p></div></li>
+        <li><span class="yr">2013</span><div><h3>Найдавніші фото й записи</h3><p>З цього року в парафії збереглися фото і записи богослужінь, зокрема з Великодня 2013 року.</p></div></li>
+        <li><span class="yr">2018</span><div><h3>Новий настоятель</h3><p>29 травня настоятелем храму призначено протоієрея Василя Семенюка.</p></div></li>
+        <li><span class="yr" id="this-year">2026</span><div><h3>Сьогодні</h3><p>При храмі діють братство, сестринство і недільна школа. Недільні Літургії транслюються на <a href="https://www.youtube.com/@hankivtsi.cherch" target="_blank" rel="noopener">YouTube-каналі храму</a>.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="wrap">
+      <div class="photo"><img src="img/inside.webp" alt="Священник на колінах перед Плащаницею біля іконостаса" loading="lazy"></div>
+      <div class="copy">
+        <h2>Розповідь <em>про храм</em></h2>
+        <p>Храм Успіння Пресвятої Богородиці збудувала громада села у 1865 році. Через сім років у ньому з’явився іконостас роботи віденських художників, який прикрашає храм і досі.</p>
+        <p class="ph">[Спогади настоятеля і старших парафіян: допишемо разом]</p>
+        <p style="font-size:.9rem;color:var(--muted)">Відомості за даними <a href="https://pravoslavie.if.ua/eparchy/blagochinnja/snyatynske-blagochynnya/s-gankivczi/" target="_blank" rel="noopener">Івано-Франківської єпархії ПЦУ</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" style="color:inherit">Храм Успіння Пресвятої Богородиці</a>
+    <span>Православна церква України, село Ганьківці, Івано-Франківська область</span>
+  </div>
+</footer>
+
+<script>
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const sizeBtn = document.getElementById("size-btn");
+function setBig(on) { document.documentElement.classList.toggle("big", on); sizeBtn.setAttribute("aria-pressed", on); store.set("church-big", on ? "1" : "0"); }
+sizeBtn.onclick = () => setBig(!document.documentElement.classList.contains("big"));
+setBig(store.get("church-big") === "1");
+
+function plural(n, one, few, many) { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; }
+const now = new Date(), feast = new Date(now.getFullYear(), 7, 15);
+const age = now.getFullYear() - 1865 - (now < feast ? 1 : 0);
+document.getElementById("age-num").textContent = age;
+document.getElementById("age-cap").textContent = `${plural(age, "рік", "роки", "років")} храму сьогодні. Наступного храмового свята, 15 серпня, виповниться ${age + 1}.`;
+document.getElementById("this-year").textContent = now.getFullYear();
+
+const bar = document.getElementById("bar");
+addEventListener("scroll", () => bar.classList.toggle("solid", scrollY > innerHeight * .5), { passive: true });
+</script>
+</body>
+</html>
