@@ -75,6 +75,6 @@ Placeholders to fill (shown in orange brackets on the page):
 ## Admin part (10.11.2026)
 - Sveltia CMS 0.251.0 at `site/admin/` (config.yml; repo is still OWNER/REPO). It edits `site/content/services.json` (regular schedule and this week), `gallery.json` (albums by date and kind with photos) and `site.json` (street, email, phone). Uploads go to `site/img/uploads`.
 - `index.html` reads services and contacts from the data files and keeps the static version as a fallback. `gallery.html` groups albums by year and has an album viewer and a full-screen photo view.
-- Hosting plan: GitHub repo plus Netlify (`netlify.toml` publishes `site`). Admin login uses GitHub OAuth through Netlify. Setup steps are in [[Як запустити сайт]].
+- Hosting: GitHub repo petroju/hankivtsi-church plus Netlify at https://hankivstichurch.netlify.app (`netlify.toml` publishes `site`). Admin login uses GitHub OAuth through Netlify. Setup steps are in [[Як запустити сайт]].
 - A git repo is initialised in this folder (nothing committed yet). Old concept files were moved to `old/` (gitignored).
 - Next: Bible page with reading plans (love, 30 days; Great Lent; Nativity Fast) that links to YouVersion, since modern translations are copyrighted. Then the OCU calendar.

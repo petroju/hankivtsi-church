@@ -7,7 +7,8 @@ backend:
   branch: main
 
 locale: uk
-# site_url: https://... (add once the site has its internet address)
+site_url: https://hankivstichurch.netlify.app
+display_url: https://hankivstichurch.netlify.app
 
 media_folder: site/img/uploads
 public_folder: /img/uploads
