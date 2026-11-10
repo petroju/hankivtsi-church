@@ -1,0 +1,5 @@
+# Local-only files
+.claude/
+old/
+*.tmp
+desktop.ini

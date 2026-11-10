@@ -1,0 +1,8 @@
+# Netlify publishes the "site" folder; the admin page lives at /admin
+[build]
+  publish = "site"
+
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "no-cache"
